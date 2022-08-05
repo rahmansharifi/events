@@ -18,7 +18,7 @@ function App() {
     <Routes>
       <Route path='/signup' element={<Signup />} />
       <Route path='/login' element={<Login />} />
-      <Route path='/dashboard' element={<Dashboard />} />
+      <Route path='/dashboard/events' element={<Dashboard />} />
       <Route path='/' element={<Redirect to='/login' />} />
     </Routes>
   );

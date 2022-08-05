@@ -5,6 +5,10 @@ html, body, #root {
     padding: 0;
     background: #475569;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .form-container {
@@ -102,12 +106,12 @@ html, body, #root {
     text-decoration: none;
 }
 
-.form-container form div .loader {
+.loader {
     display: flex;
     flex-direction: row;
 }
 
-.form-container form div .loader div {
+.loader div {
     background: #000000;
     height: 6px;
     width: 6px;
@@ -137,30 +141,199 @@ html, body, #root {
     }
 }
 
-.form-container form div .loader div:nth-child(1) {
+.loader div:nth-child(1) {
     animation-delay: 0ms;
 }
 
-.form-container form div .loader div:nth-child(2) {
+.loader div:nth-child(2) {
     animation-delay: 100ms;
 }
 
-.form-container form div .loader div:nth-child(3) {
+.loader div:nth-child(3) {
     animation-delay: 200ms;
 }
 
-.form-container form div .loader div:nth-child(4) {
+.loader div:nth-child(4) {
     animation-delay: 300ms;
 }
 
-.form-container form div .loader div:nth-child(5) {
+.loader div:nth-child(5) {
     animation-delay: 400ms;
 }
 
-.form-container form div .loader div:nth-child(6) {
+.loader div:nth-child(6) {
     animation-delay: 500ms;
 }
 
-.form-container form div .error {
+.error {
     color: #ff0000;
+}
+
+.search-container {
+    width: calc(100% - 40px);
+    max-width: 900px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 10px;
+    padding: 10px 10px;
+    border-radius: 3px;
+}
+
+.search-container input {
+    color: #000000;
+    border: 1px solid #ffffff;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    font-size: medium;
+    border-radius: 3px;
+    transition: all 200ms ease-in-out;
+    font-weight: bold;
+}
+
+.search-container input:focus {
+    color: #000000;
+    border: 1px solid #000000;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 0 3px 1px #475569;
+    outline: none;
+    font-size: medium;
+    border-radius: 3px;
+    transition: all 200ms ease-in-out;
+}
+
+.search-container input::placeholder {
+    color: #475569;
+    font-size: medium;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: calc(100% - 40px);
+    max-width: 900px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    -webkit-box-align: center;
+    -webkit-box-pack: justify;
+    padding-bottom: 20px;
+}
+
+.cards .event-card {
+    border-radius: 5px;
+    padding: 0 30px;
+    margin: 10px;
+    height: 200px;
+}
+
+@media screen and (max-width:705px){
+    .event-card {
+        flex-basis: 100%;
+    }
+}
+@media screen and (min-width:705px) and (max-width:900px){
+    .event-card {
+        flex-basis: 40%;
+    }
+}
+@media screen and (min-width:900px){
+    .event-card {
+        flex-basis: 24%;
+    }
+}
+
+.cards .event-card span {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 8px;
+    color: #ffffff;
+    text-transform: capitalize;
+    border-radius: 5px;
+}
+
+.new {
+    background: #334155;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.new div:nth-child(1) {
+    background: #ffffff;
+    height: 10px;
+    width: 50px;
+    transform: rotate(90deg);
+}
+.new div:nth-child(2) {
+    background: #ffffff;
+    height: 10px;
+    width: 50px;
+    margin-top: -10px;
+}
+
+.dashboard-loading {
+    flex-basis: 100%;
+    background: #334155;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.dashboard-loading div {
+    height: 50px;
+    width: 50px;
+    box-sizing: border-box;
+    border: 10px solid #ffffff;
+    border-radius: 50%;
+    border-right: 10px solid #334155;
+    animation: spin 500ms linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.cold {
+    background: #2563eb;
+}
+.cold span {
+    background: #2f5bba;
+}
+
+.normal {
+    background: #e9b30b;
+}
+.normal span {
+    background: #b3901f;
+}
+
+.hot {
+    background: #ef4444;
+}
+.hot span {
+    background: #b5444a;
+}
+
+.cards .event-card h3 {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+}
+
+.cards .event-card p {
+    box-sizing: border-box;
+    margin: 20px 0;
+    padding: 0;
+    color: #ffffff;
 }

@@ -71,7 +71,7 @@ const Signup = () => {
             })
             if (call.data.http === 201) {
                 cookies.set('auth',call.data.auth,{maxAge:7*24*60*60})
-                forward('/dashboard')
+                forward('/dashboard/events')
             } 
             else
             {
