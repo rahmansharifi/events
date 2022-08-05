@@ -1,4 +1,4 @@
-import React, { useState, useRef, /*useEffect*/ } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -12,7 +12,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [loader, setLoader] = useState(false);
+    const [loader, setLoader] = useState(cookies.get('auth')===undefined?false:true);
     const [error, setError] = useState('');
 
     const emailRef = useRef(null);
@@ -71,6 +71,25 @@ const Login = () => {
             setError((''+e).split('\n')[0].replace('Error: ','').replace('<email>','Email').replace('<password>','Password'))
         }
     }
+
+    useEffect(()=>{
+        async function sessionCheck() {
+            const call = await axios.get('https://api.rahmansharifi.ir/me',{
+                headers:{
+                    'Authorization': 'Bearer '+cookies.get('auth')
+                }
+            })
+            if (call.data.http === 200) {
+                forward('/dashboard/events')
+            }
+            else
+            {
+                setLoader(false);
+            }
+        }
+        sessionCheck();
+        // eslint-disable-next-line
+    },[])
 
     return (
         <div className='form-container'>

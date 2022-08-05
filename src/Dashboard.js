@@ -77,7 +77,9 @@ const Dashboard = () => {
                                 return <div key={key} className={card}>
                                     <span>{item.priority}</span>
                                     <h3>{item.title}</h3>
-                                    <p>{item.body}</p>
+                                    <div className='boundary'>
+                                        <p>{item.body}</p>
+                                    </div>
                                 </div>
                             }
                             else
