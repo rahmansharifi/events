@@ -12,10 +12,27 @@ const Dashboard = () => {
     const [loader, setLoader] = useState(true);
     const [error, setError] = useState('');
     const [events, setEvents] = useState({});
+    const [user, setUser] = useState({});
+
+    async function getUser(){
+        const call = await axios.get('https://api.rahmansharifi.ir/me',{
+            headers:{
+                'Authorization': 'Bearer '+cookies.get('auth')
+            }
+        })
+        if (call.data.http===200) {
+            setUser(call.data.user)
+        }
+        else
+        {
+            throw new Error(call.data.exception)
+        }
+    }
 
     useEffect(()=>{
         async function get() {
             try {
+                getUser();
                 const call = await axios.get('https://api.rahmansharifi.ir/events/',{
                     headers:{
                         'Authorization': 'Bearer ' + cookies.get('auth')
@@ -58,7 +75,7 @@ const Dashboard = () => {
             {
                 !loader && !error &&
                     <div className='identifier'>
-                        <div className='email'>rahmansharifi79@gmail.com</div>
+                        <div className='email'>{user.name}</div>
                         <div className='logout' onClick={logout}>Logout</div>
                     </div>
             }
