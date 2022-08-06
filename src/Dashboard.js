@@ -38,6 +38,11 @@ const Dashboard = () => {
         // eslint-disable-next-line
     },[])
 
+    function logout() {
+        document.cookie = 'auth=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        forward('/login');
+    }
+
     return (
         <>
             <div className='search-container'>
@@ -49,6 +54,14 @@ const Dashboard = () => {
                     onChange={event=>setSearch(event.target.value)}
                 />
             </div>
+
+            {
+                !loader && !error &&
+                    <div className='identifier'>
+                        <div className='email'>rahmansharifi79@gmail.com</div>
+                        <div className='logout' onClick={logout}>Logout</div>
+                    </div>
+            }
             
             {
                 error &&

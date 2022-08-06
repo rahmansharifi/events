@@ -94,8 +94,7 @@ const Event = () => {
                             if (key===event){
                                 let item = events[key];
                                 let card = 'event-card '+item.priority;
-                                return <>
-                                    <div key={key} className={card}>
+                                return <div key={key} className={card}>
                                         <span>{item.priority}</span>
                                         <h3 dir='auto'>{item.title}</h3>
                                         <div className='boundary'>
@@ -107,7 +106,6 @@ const Event = () => {
                                             <button className={'font-'+item.priority} onClick={deleteEvent}>{pending?<div></div>:'Delete'}</button>
                                         </div>
                                     </div>
-                                </>
                             }
                             else
                             {

@@ -1,10 +1,11 @@
-import React, { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 
-const New = () => {
+const Edit = () => {
+
+    const {eventId} = useParams();
 
     const forward = useNavigate();
     const cookies = new Cookies();
@@ -13,7 +14,7 @@ const New = () => {
     const [body, setBody] = useState('');
     const [priority, setPriority] = useState('normal');
 
-    const [loader, setLoader] = useState(false);
+    const [loader, setLoader] = useState(true);
     const [error, setError] = useState('');
 
     const titleRef = useRef();
@@ -49,7 +50,7 @@ const New = () => {
         setError('')
         setLoader(true)
         try {
-            const call = await axios.post('https://api.rahmansharifi.ir/events/',{
+            const call = await axios.patch('https://api.rahmansharifi.ir/events/'+eventId,{
                 title: title,
                 body: body,
                 priority: priority,
@@ -60,7 +61,7 @@ const New = () => {
                 }
             })
             if (call.data.http === 200) {
-                forward('/dashboard/events')
+                forward('/dashboard/events/'+eventId)
             } 
             else
             {
@@ -72,10 +73,46 @@ const New = () => {
         }
     }
 
+    useEffect(()=>{
+        async function get() {
+            try {
+                const call = await axios.get('https://api.rahmansharifi.ir/events/',{
+                    headers:{
+                        'Authorization': 'Bearer '+cookies.get('auth')
+                    }
+                })
+                if (call.data.http === 200)
+                {
+                    let eventObject = {};
+                    Object.keys(call.data.events).map(key=>{
+                        if (eventId===key) {
+                            eventObject = {...call.data.events[key]};
+                            return true;
+                        }
+                        return false;
+                    })
+                    setLoader(false);
+                    setTitle(eventObject.title);
+                    setBody(eventObject.body);
+                    setPriority(eventObject.priority);
+                }
+                else
+                {
+                    throw new Error(call.data.exception)
+                }
+            } catch(e) {
+                setLoader(false)
+                setError((''+e).split('\n')[0].replace('Error: ','').replace('<session>','Session'))
+            }
+        }
+        get()
+        // eslint-disable-next-line
+    },[])
+
     return (
         <div className='form-container'>
             <form>
-                <h1>Add Event</h1>
+                <h1>Edit Event</h1>
                 <input 
                     required
                     autoComplete='off'
@@ -124,7 +161,7 @@ const New = () => {
                     <label htmlFor='priority-cold' className={priority==='cold'?'cold':''}>Cold</label>
                 </div>
                 <div>
-                    <input type='submit' value='Add' onClick={submit} />
+                    <input type='submit' value='Edit' onClick={submit} />
                     {
                         loader &&
                             <div className='loader'>
@@ -140,11 +177,11 @@ const New = () => {
                         error &&
                             <div className='error'>{error}</div>
                     }
-                    <Link to='/dashboard/events'>Dashboard</Link>
+                    <Link to={'/dashboard/events/'+eventId}>Event</Link>
                 </div>
             </form>
         </div>
     );
 };
 
-export default New;
+export default Edit;

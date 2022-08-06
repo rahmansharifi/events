@@ -617,3 +617,21 @@ html, body, #root {
     border-radius: 50%;
     animation: spin 500ms infinite linear;
 }
+
+.identifier {
+    width: calc(100% - 40px);
+    max-width: 900px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.identifier .email {
+    color: #ffffff;
+}
+
+.identifier .logout {
+    color: #334155;
+}
