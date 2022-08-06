@@ -74,11 +74,11 @@ const Dashboard = () => {
                             let item = events[key];
                             if (item.title.toLowerCase().includes(search.toLowerCase()) || item.body.toLowerCase().includes(search.toLowerCase())){
                                 let card = 'event-card '+item.priority;
-                                return <div key={key} className={card}>
+                                return <div key={key} className={card} onClick={()=>forward('/dashboard/events/'+key)}>
                                     <span>{item.priority}</span>
-                                    <h3>{item.title}</h3>
+                                    <h3 dir='auto'>{item.title}</h3>
                                     <div className='boundary'>
-                                        <p>{item.body}</p>
+                                        <p dir='auto'>{item.body}</p>
                                     </div>
                                 </div>
                             }

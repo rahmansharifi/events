@@ -6,6 +6,7 @@ import Signup from "./Signup";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
 import New from "./New";
+import Event from "./Event";
 
 function Redirect({to}) {
   const forward = useNavigate();
@@ -19,6 +20,7 @@ function App() {
     <Routes>
       <Route path='/signup' element={<Signup />} />
       <Route path='/login' element={<Login />} />
+      <Route path='/dashboard/events/:event' element={<Event />} />
       <Route path='/dashboard/events/new' element={<New />} />
       <Route path='/dashboard/events' element={<Dashboard />} />
       <Route path='/' element={<Redirect to='/login' />} />

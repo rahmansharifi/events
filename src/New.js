@@ -78,6 +78,7 @@ const New = () => {
                 <h1>Add Event</h1>
                 <input 
                     required
+                    dir='auto'
                     ref={titleRef}
                     name='events_todo_title' 
                     type='text' 
@@ -87,6 +88,7 @@ const New = () => {
                 />
                 <textarea
                     required
+                    dir='auto'
                     ref={bodyRef}
                     name='events_todo_body' 
                     type='text' 
