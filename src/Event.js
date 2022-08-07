@@ -21,7 +21,7 @@ const Event = () => {
     }
 
     function breakLine(content) {
-        let out = content.split('\n').map(line=><p dir='auto'>{line}</p>);
+        let out = content.split('\n').map(line=>"<p dir='auto'>"+line+"</p>");
         return out.join('');
     }
 
