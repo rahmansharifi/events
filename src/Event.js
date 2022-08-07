@@ -18,7 +18,12 @@ const Event = () => {
     function timeConverter(unix){
         const a = new Date(unix*1000);
         return a.toLocaleDateString("en-US")+' '+a.toLocaleTimeString("en-US");
-      }
+    }
+
+    function breakLine(content) {
+        let out = content.split('\n').map(line=><p dir='auto'>{line}</p>);
+        return out.join('');
+    }
 
     useEffect(()=>{
         async function get() {
@@ -98,7 +103,7 @@ const Event = () => {
                                         <span>{item.priority}</span>
                                         <h3 dir='auto'>{item.title}</h3>
                                         <div className='boundary'>
-                                            <p dir='auto'>{item.body}</p>
+                                            <p dir='auto'>{breakLine(item.body)}</p>
                                             <div className={'date-'+item.priority}>{timeConverter(item.created)}</div>
                                         </div>
                                         <div className='footer'>

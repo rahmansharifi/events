@@ -292,7 +292,7 @@ html, body, #root {
     color: #ffffff;
     text-transform: capitalize;
     border-radius: 5px;
-    word-break: break-all;
+    break: break-all;
 }
 
 .new {
