@@ -138,7 +138,7 @@ const Login = () => {
                 </form>
             </div>
             <div className='install-container'>
-                {install && <button id='install'>Install App</button>}
+                <button id='install' onClick={install}>Install App</button>
             </div>
         </>
     );
