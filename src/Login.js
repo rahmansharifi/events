@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import { usePWAInstall } from 'react-use-pwa-install'
 
 const Login = () => {
 
+    const install = usePWAInstall()
     const forward = useNavigate();
     const cookies = new Cookies();
 
@@ -92,48 +94,53 @@ const Login = () => {
     },[])
 
     return (
-        <div className='form-container'>
-            <form>
-                <h1>Login</h1>
-                <input 
-                    required
-                    ref={emailRef}
-                    name='events_todo_email' 
-                    type='email' 
-                    placeholder='Email' 
-                    value={email}
-                    onChange={event=>setEmail(event.target.value)}
-                />
-                <input 
-                    required
-                    ref={passwordRef}
-                    name='events_todo_password' 
-                    type='password' 
-                    placeholder='Password' 
-                    value={password}
-                    onChange={event=>setPassword(event.target.value)}
-                />
-                <div>
-                    <input type='submit' value='Login' onClick={submit} />
-                    {
-                        loader &&
-                            <div className='loader'>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                    }
-                    {
-                        error &&
-                            <div className='error'>{error}</div>
-                    }
-                    <Link to='/signup'>Signup</Link>
-                </div>
-            </form>
-        </div>
+        <>
+            <div className='form-container'>
+                <form>
+                    <h1>Login</h1>
+                    <input 
+                        required
+                        ref={emailRef}
+                        name='events_todo_email' 
+                        type='email' 
+                        placeholder='Email' 
+                        value={email}
+                        onChange={event=>setEmail(event.target.value)}
+                    />
+                    <input 
+                        required
+                        ref={passwordRef}
+                        name='events_todo_password' 
+                        type='password' 
+                        placeholder='Password' 
+                        value={password}
+                        onChange={event=>setPassword(event.target.value)}
+                    />
+                    <div>
+                        <input type='submit' value='Login' onClick={submit} />
+                        {
+                            loader &&
+                                <div className='loader'>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                        }
+                        {
+                            error &&
+                                <div className='error'>{error}</div>
+                        }
+                        <Link to='/signup'>Signup</Link>
+                    </div>
+                </form>
+            </div>
+            <div className='install-container'>
+                {install && <button id='install'>Install App</button>}
+            </div>
+        </>
     );
 };
 
