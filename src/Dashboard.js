@@ -32,7 +32,7 @@ const Dashboard = () => {
     useEffect(()=>{
         async function get() {
             try {
-                getUser();
+                await getUser();
                 const call = await axios.get('https://api.rahmansharifi.ir/events/',{
                     headers:{
                         'Authorization': 'Bearer ' + cookies.get('auth')
