@@ -60,7 +60,7 @@ const New = () => {
                 }
             })
             if (call.data.http === 200) {
-                forward('/dashboard/events')
+                forward('/events')
             } 
             else
             {
@@ -140,7 +140,7 @@ const New = () => {
                         error &&
                             <div className='error'>{error}</div>
                     }
-                    <Link to='/dashboard/events'>Dashboard</Link>
+                    <Link to='/events'>Cancel</Link>
                 </div>
             </form>
         </div>

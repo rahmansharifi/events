@@ -75,7 +75,13 @@ const Dashboard = () => {
             {
                 !loader && !error &&
                     <div className='identifier'>
-                        <div className='email'>{user.name}</div>
+                        {
+                            user.admin
+                            ?
+                                <div className='email' onClick={()=>forward('/admin')}>{user.name}</div>
+                            :
+                                <div className='email'>{user.name}</div>
+                        }
                         <div className='logout' onClick={logout}>Logout</div>
                     </div>
             }
@@ -93,7 +99,7 @@ const Dashboard = () => {
                 }
                 {
                     !error && !loader &&
-                        <div className='event-card new' onClick={()=>forward('/dashboard/events/new')}>
+                        <div className='event-card new' onClick={()=>forward('/events/new')}>
                             <div></div>
                             <div></div>
                         </div>
@@ -104,7 +110,7 @@ const Dashboard = () => {
                             let item = events[key];
                             if (item.title.toLowerCase().includes(search.toLowerCase()) || item.body.toLowerCase().includes(search.toLowerCase())){
                                 let card = 'event-card '+item.priority;
-                                return <div key={key} className={card} onClick={()=>forward('/dashboard/events/'+key)}>
+                                return <div key={key} className={card} onClick={()=>forward('/events/'+key)}>
                                     <span>{item.priority}</span>
                                     <h3 dir='auto'>{item.title}</h3>
                                     <div className='boundary'>

@@ -54,7 +54,7 @@ const Event = () => {
                 }
             })
             if (call.data.http === 200) {
-                forward('/dashboard/events')
+                forward('/events')
             }
             else
             {
@@ -68,8 +68,8 @@ const Event = () => {
 
     return (
         <>
-            <div className='header-container'>
-                <div className='backward' onClick={()=>forward('/dashboard/events')}>
+            <div className='header-container' onClick={()=>forward('/events')}>
+                <div className='backward'>
                     <div></div>
                     <div></div>
                     <div></div>
@@ -104,7 +104,7 @@ const Event = () => {
                                             <div className={'date-'+item.priority}>{timeConverter(item.created)}</div>
                                         </div>
                                         <div className='footer'>
-                                            <button className={'button-'+item.priority} onClick={()=>forward('/dashboard/events/'+event+'/edit')}>Edit</button>
+                                            <button className={'button-'+item.priority} onClick={()=>forward('/events/'+event+'/edit')}>Edit</button>
                                             <button className={'font-'+item.priority} onClick={deleteEvent}>{pending?<div></div>:'Delete'}</button>
                                         </div>
                                     </div>
